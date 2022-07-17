@@ -1,12 +1,9 @@
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/api-gateway';
 import { formatJSONResponse } from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
+import products from '@constants/products.json';
 
-const products: ValidatedEventAPIGatewayProxyEvent<null> = async (event) => {
-  return formatJSONResponse({
-    message: `products, welcome to the exciting Serverless world!`,
-    event,
-  });
+const productList: ValidatedEventAPIGatewayProxyEvent<null> = async (event) => {
+  return await formatJSONResponse(products);
 };
-
-export const main = middyfy(products);
+export const main = middyfy(productList);

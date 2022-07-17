@@ -8,6 +8,12 @@ export default {
       http: {
         method: 'get',
         path: 'products',
+        responses: {
+          200: {
+            description: 'This return all the products in the stock',
+            bodyType: 'Products',
+          }
+        }
       },
     },
   ],
