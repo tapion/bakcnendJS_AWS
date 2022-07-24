@@ -26,6 +26,29 @@
             }
           }
         }
+      },
+      "post": {
+        "summary": "createProduct",
+        "description": "",
+        "operationId": "createProduct.post./products",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Create a new product",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "400": {
+            "description": "Invalid product structure"
+          }
+        }
       }
     },
     "/products/{productId}": {
@@ -102,5 +125,6 @@
       "type": "array"
     }
   },
-  "securityDefinitions": {}
+  "securityDefinitions": {},
+  "basePath": "/dev"
 };
