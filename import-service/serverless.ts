@@ -29,6 +29,11 @@ const serverlessConfiguration: AWS = {
         Action: ["s3:*"],
         Resource: ["arn:aws:s3:::products-shop/*"]        
       },
+      {
+        Effect: "Allow",
+        Action: ["sqs:SendMessage"],
+        Resource: ["arn:aws:sqs:us-east-1:761488678750:MyQueue"]        
+      },
     ],
   },
   // import the function via paths

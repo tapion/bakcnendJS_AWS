@@ -10,6 +10,7 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
+    "@aws-sdk/client-sns": "^3.142.0",
     "@middy/core": "^2.5.3",
     "@middy/http-json-body-parser": "^2.5.3"
   },
@@ -22,7 +23,9 @@
     "pg": "^8.7.3",
     "serverless": "^3.0.0",
     "serverless-auto-swagger": "^2.8.2",
+    "serverless-dotenv-plugin": "^4.0.2",
     "serverless-esbuild": "^1.23.3",
+    "serverless-lift": "^1.20.2",
     "serverless-offline": "^9.0.0",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.9.0",
