@@ -33,18 +33,27 @@ const serverlessConfiguration: AWS = {
       PG_PORT: '${env:PG_PORT}',
     },
     iam: {
-      role: "arn:aws:iam::761488678750:role/Call_RD_FROM_Lambdas",
-    },
-    vpc: {
-      securityGroupIds: ["sg-096d74b99870444a4"],
-      subnetIds: [
-        "subnet-09a4fec2bbac5b478",
-        "subnet-00071adc1f1cf05e2",
-        "subnet-0154b9b014df052a7",
-        "subnet-09a02f60289901a13",
-        "subnet-0aabcee66901821ed",
-        "subnet-09c084febb1bcb984",
-      ],
+      role: {
+        statements: [
+          {
+            Effect: "Allow",
+            Action: ["sqs:*"],
+            Resource: [
+              {
+                "Fn::GetAtt": ["MyQueue", "Arn"],
+              },
+            ],
+          },
+          {
+            Effect: "Allow",
+            Action: ["sns:*"],
+            Resource: [
+              `arn:aws:sns:us-east-1:761488678750:createProductTopic`,
+              'arn:aws:sns:us-east-1:761488678750:temporal'
+            ],
+          },
+        ],
+      },
     },
   },
   // import the function via paths
@@ -79,18 +88,18 @@ const serverlessConfiguration: AWS = {
           QueueName: "MyQueue",
         },
       },
+      createProductTopic: {
+        Type: "AWS::SNS::Topic",
+        Properties: {
+          TopicName: "createProductTopic",
+        },
+      },
       emailSubscription:{
         Type: "AWS::SNS::Subscription",
         Properties: {
           "Endpoint" : "puntadelanza86@gmail.com",
           "Protocol" : "email",
           "TopicArn" : { "Ref" : "createProductTopic" }
-        },
-      },
-      createProductTopic: {
-        Type: "AWS::SNS::Topic",
-        Properties: {
-          TopicName: "createProductTopic",
         },
       },
     },
