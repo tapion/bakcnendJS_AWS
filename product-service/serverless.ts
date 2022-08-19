@@ -49,7 +49,6 @@ const serverlessConfiguration: AWS = {
             Action: ["sns:*"],
             Resource: [
               `arn:aws:sns:us-east-1:761488678750:createProductTopic`,
-              'arn:aws:sns:us-east-1:761488678750:temporal'
             ],
           },
         ],
@@ -100,6 +99,17 @@ const serverlessConfiguration: AWS = {
           "Endpoint" : "puntadelanza86@gmail.com",
           "Protocol" : "email",
           "TopicArn" : { "Ref" : "createProductTopic" }
+        },
+      },
+      filterSubscription:{
+        Type: "AWS::SNS::Subscription",
+        Properties: {
+          "Endpoint" : "miguel_vargas@epam.com",
+          "Protocol" : "email",
+          "TopicArn" : { "Ref" : "createProductTopic" },
+          "FilterPolicy": {
+            maxPrice: [{ numeric: ['>=', 1] }]
+          }
         },
       },
     },
