@@ -1,4 +1,2 @@
-name,price
-phone,200
-mouse,10
-cap,20
+title,description,price,count
+Wanda,My black soul, 999, 1
